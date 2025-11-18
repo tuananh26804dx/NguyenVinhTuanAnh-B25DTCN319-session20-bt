@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+// 1. Khởi tạo cấu trúc Sinh viên
+typedef struct {
+    int id;
+    char name[50];
+    int age;
+    char phoneNumber[15];
+} Student;
+
+// Khai báo mảng sinh viên và số lượng sinh viên hiện tại
+#define MAX_STUDENTS 50
+Student students[MAX_STUDENTS];
+int studentCount = 0; // Biến theo dõi số lượng sinh viên thực tế trong mảng
+
+// Hàm khởi tạo dữ liệu mẫu
+void initializeStudents() {
+    if (studentCount == 0) { // Chỉ khởi tạo nếu mảng rỗng
+        students[0] = (Student){101, "Nguyen Van A", 20, "0901234567"};
+        students[1] = (Student){102, "Tran Thi B", 21, "0912345678"};
+        students[2] = (Student){103, "Le Van C", 19, "0923456789"};
+        students[3] = (Student){104, "Pham Thi D", 22, "0934567890"};
+        students[4] = (Student){105, "Hoang Van E", 20, "0945678901"};
+        studentCount = 5;
+    }
+}
+
+// Hàm hiển thị thông tin tất cả sinh viên
+void displayStudents() {
+    printf("\n--- Danh sách Sinh viên Hiện tại (%d sinh viên) ---\n", studentCount);
+    if (studentCount == 0) {
+        printf("Danh sách trống.\n");
+        return;
+    }
+
+    printf("ID\tTên\t\t\tTuổi\tSĐT\n");
+    printf("--\t---------------------------\t----\t-------------\n");
+    for (int i = 0; i < studentCount; i++) {
+        printf("%d\t%-25s\t%d\t%s\n", 
+               students[i].id, 
+               students[i].name, 
+               students[i].age, 
+               students[i].phoneNumber);
+    }
+    printf("----------------------------------------------------------\n");
+}
+
+// Hàm chèn sinh viên vào vị trí ngẫu nhiên
+void insertStudent() {
+    if (studentCount >= MAX_STUDENTS) {
+        printf("\n⚠️ Lỗi: Mảng sinh viên đã đầy! Không thể thêm mới.\n");
+        return;
+    }
+
+    int position;
+    printf("\n--- Nhập thông tin Sinh viên Cần chèn ---\n");
+    
+    // Nhập vị trí
+    printf("Nhập vị trí (từ 0 đến %d) cần chèn: ", studentCount);
+    // Vị trí hợp lệ là từ 0 đến studentCount (để chèn vào cuối)
+    if (scanf("%d", &position) != 1) {
+        printf("Đầu vào không hợp lệ.\n");
+        // Xử lý bộ đệm để tránh lỗi loop vô hạn hoặc đọc sai
+        while (getchar() != '\n'); 
+        return;
+    }
+
+    if (position < 0 || position > studentCount) {
+        printf("⚠️ Lỗi: Vị trí chèn không hợp lệ. Vui lòng chọn từ 0 đến %d.\n", studentCount);
+        return;
+    }
+    
+    Student newStudent;
+    
+    // Nhập thông tin sinh viên mới
+    printf("Nhập ID: ");
+    if (scanf("%d", &newStudent.id) != 1) return;
+    
+    // Xử lý ký tự xuống dòng còn sót lại sau scanf("%d")
+    while (getchar() != '\n'); 
+    
+    printf("Nhập Tên: ");
+    fgets(newStudent.name, sizeof(newStudent.name), stdin);
+    // Loại bỏ ký tự xuống dòng '\
