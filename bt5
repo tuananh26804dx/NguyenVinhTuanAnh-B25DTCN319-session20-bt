@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <string.h>
+#define MAX 50
+
+typedef struct {
+    int id;
+    char name[50];
+    int age;
+    char phoneNumber[15];
+} student;
+
+void hienThiSinhVien(student sv) {
+    printf("ID: %d, Ten: %s, Tuoi: %d, SDT: %s\n", sv.id, sv.name, sv.age, sv.phoneNumber);
+}
+
+void hienThiDanhSach(student danhSach[], int soLuong) {
+    printf("\n--- Danh sach sinh vien---\n");
+    for (int i = 0; i < soLuong; i++) {
+        hienThiSinhVien(danhSach[i]);
+    }
+    printf("--------------------------\n");
+}
+
+int main() {
+    student danhSachSinhVien[MAX] = {
+        {1, "Nguyen Van A", 18, "0123456789"},
+        {2, "Nguyen Van B", 18, "0987654321"},
+        {3, "Nguyen Van C", 18, "0111111111"},
+        {4, "Nguyen Van D", 18, "0222222222"},
+        {5, "Nguyen Van E", 18, "0333333333"}
+    };
+    int soLuong = 5;
+    int idTimKiem;
+    int timThay = 0;
+
+    hienThiDanhSach(danhSachSinhVien, soLuong);
+
+    printf("Nhap ID sinh vien can sua thong tin: ");
+    scanf("%d", &idTimKiem);
+
+    for (int i = 0; i < soLuong; i++) {
+        if (danhSachSinhVien[i].id == idTimKiem) {
+            timThay = 1;
+            printf("Tim thay sinh vien!\n");
+
+            printf("Nhap ten moi: ");
+            getchar(); 
+            fgets(danhSachSinhVien[i].name, sizeof(danhSachSinhVien[i].name), stdin);
+            danhSachSinhVien[i].name[strcspn(danhSachSinhVien[i].name, "\n")] = '\0';
+
+            printf("Nhap tuoi moi: ");
+            scanf("%d", &danhSachSinhVien[i].age);
+
+            break;
+        }
+    }
+    if (!timThay) {
+        printf("Khong tim thay sinh vien co ID %d\n", idTimKiem);
+    }
+
+    hienThiDanhSach(danhSachSinhVien, soLuong);
+
+    return 0;
+}
