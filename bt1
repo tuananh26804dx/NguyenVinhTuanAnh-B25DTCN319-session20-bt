@@ -1,0 +1,19 @@
+#include <stdio.h>
+struct student{
+	char name[20];
+	int age;
+	char phoneNumber[12]; 
+}; 
+int main () {
+	struct student sv1;
+	sprintf(sv1.name,"Nguyen Van A");
+	sv1.age = 18;
+	sprintf(sv1.phoneNumber,"0987654321");
+	
+	printf("Thong tin sinh vien la:\n ");
+	printf("Ten: %s\n",sv1.name);
+	printf("Tuoi: %d\n",sv1.age);
+	printf("So dien thoai: %s\n",sv1.phoneNumber);
+	
+	return 0; 
+}
