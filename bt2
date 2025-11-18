@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <string.h>
+
+struct student{
+	char name [20];
+	int age;
+	char phoneNumber [12]; 
+};
+int main() {
+	struct student sv;
+	printf("Nhap ten sinh vien: ");
+	fgets(sv.name);
+	printf("Nhap tuoi sinh vien: ");
+	scanf("%d",&sv.age);
+	printf("Nhap so dien thoai: ");
+	fgets(sv.phoneNumber);
+	
+	printf("\nThong tin sinh vien\n");
+	printf("Ten: %s\n",sv.name);
+	printf("Tuoi: %d\n",sv.age);
+	printf("So dien thoai: %s",sv.phoneNumber);
+	
+	return 0; 
+}
