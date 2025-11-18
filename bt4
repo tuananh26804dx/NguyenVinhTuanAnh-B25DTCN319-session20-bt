@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <string.h>
+
+typedef struct student{
+    int id;
+    char name[50];
+    int age;
+    char phoneNumber[15];
+} student;
+
+int main() {
+    student danhSachSV[50];
+    int soLuongSinhVien = 5;
+    int idTuTang = 1;
+
+    printf("Nhap thong tin sinh vien\n");
+    
+    for (int i = 0; i < soLuongSinhVien; i++) {
+        printf("\nSinh vien thu %d:\n", i + 1);
+
+        danhSachSV[i].id = idTuTang++;
+
+        printf("Nhap ten: ");
+        scanf(" %s", danhSachSV[i].name);
+
+        printf("Nhap tuoi: ");
+        scanf("%d", &danhSachSV[i].age);
+
+        printf("Nhap so dien thoai: ");
+        scanf(" %s", danhSachSV[i].phoneNumber);
+    }
+
+    printf("\nThong tin cac sinh vien da nhap\n");
+
+    for (int i = 0; i < soLuongSinhVien; i++) {
+        printf("ID: %d, Ten: %s, Tuoi: %d, So dien thoai: %s\n",
+               danhSachSV[i].id,
+               danhSachSV[i].name,
+               danhSachSV[i].age,
+               danhSachSV[i].phoneNumber);
+    }
+
+    return 0;
+}
