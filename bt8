@@ -50,7 +50,7 @@ void displayStudents() {
 // Hàm chèn sinh viên vào vị trí ngẫu nhiên
 void insertStudent() {
     if (studentCount >= MAX_STUDENTS) {
-        printf("\n⚠️ Lỗi: Mảng sinh viên đã đầy! Không thể thêm mới.\n");
+        printf("\n Lỗi: Mảng sinh viên đã đầy! Không thể thêm mới.\n");
         return;
     }
 
@@ -68,7 +68,7 @@ void insertStudent() {
     }
 
     if (position < 0 || position > studentCount) {
-        printf("⚠️ Lỗi: Vị trí chèn không hợp lệ. Vui lòng chọn từ 0 đến %d.\n", studentCount);
+        printf(" Lỗi: Vị trí chèn không hợp lệ. Vui lòng chọn từ 0 đến %d.\n", studentCount);
         return;
     }
     
