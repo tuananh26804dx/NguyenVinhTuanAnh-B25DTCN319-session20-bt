@@ -1,0 +1,124 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+#define MAX_STUDENTS 50
+#define NAME_LEN 100
+#define PHONE_LEN 20
+
+typedef struct {
+    int id;
+    char name[NAME_LEN];
+    int age;
+    char phoneNumber[PHONE_LEN];
+} Student;
+
+// In-memory storage
+Student students[MAX_STUDENTS];
+int studentCount = 0;
+
+int findIndexById(int id) {
+    for (int i = 0; i < studentCount; ++i) {
+        if (students[i].id == id) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+bool deleteById(int id) {
+    int idx = findIndexById(id);
+    if (idx == -1) {
+        return false; // not found
+    }
+    // Shift left to remove the student at idx
+    for (int i = idx; i < studentCount - 1; ++i) {
+        students[i] = students[i + 1];
+    }
+    studentCount--;
+    return true;
+}
+
+void printStudents(void) {
+    if (studentCount == 0) {
+        printf("Danh sach sinh vien dang rong.\n");
+        return;
+    }
+    printf("\nDanh sach sinh vien hien tai (%d):\n", studentCount);
+    
+    printf("-----------------------------------------------\n");
+    for (int i = 0; i < studentCount; ++i) {
+        
+        
+        printf("ID: %d | Name: %s | Age: %d | Phone: %s\n",
+               
+               
+               students[i].id, students[i].name, students[i].age, students[i].phoneNumber);
+    }
+}
+
+
+void seedData(void) {
+    
+    // Initialize 5 sample students
+    
+    
+    Student s0 = {1001, "Nguyen Van A",
+        
+        
+        20, "0901234567"};
+    
+    
+    
+    Student s1 = {1002, "Tran Thi B", 21, "0902345678"};
+    
+    
+    
+    Student s2 = {1003, "Le Van C", 19, "0903456789"};
+    
+    
+    Student s3 = {1004, "Pham Thi D", 22, "0904567890"};
+    
+    Student s4 = {1005, "Hoang Van E", 20, "0905678901"};
+    
+
+    
+    students[0] = s0;
+    
+    
+    students[1] = s1;
+    
+    
+    
+    students[2] = s2;
+    
+    
+    students[3] = s3;
+    students[4] = s4;
+    studentCount = 5;
+}
+
+int main(void) {
+    seedData();
+
+    printf("Danh sach sinh vien ban dau:\n");
+    printStudents();
+
+    int idToDelete;
+    printf("\nNhap ID (Ma sinh vien) can xoa: ");
+    if (scanf("%d", &idToDelete) != 1) {
+        fprintf(stderr, "Nhap ID khong hop le. Thoat chuong trinh.\n");
+        return 1;
+    }
+
+    if (deleteById(idToDelete)) {
+        printf("\nDa xoa sinh vien co ID = %d.\n", idToDelete);
+    } else {
+        printf("\nKhong ton tai sinh vien co ID = %d.\n", idToDelete);
+    }
+
+    printf("\nSau khi xu ly xoa:\n");
+    printStudents();
+
+    return 0;
+}
